@@ -10,7 +10,8 @@ def roll2sem(roll):
 		return 6
 	elif roll[1:3]=="14":
 		return 8
-	else return 0
+	else:
+		return 0
 		
 
 if __name__=='__main__':
@@ -24,7 +25,7 @@ if __name__=='__main__':
 	br=mechanize.Browser()
 	response=br.open(tarurl)
 	
-	if department==1 and semester==1:
+	if 1:
 		for dept in depts:
 			fil=open(dept+".txt","r").read()
 			rolls=fil.split("\r\n")
