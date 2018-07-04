@@ -1,6 +1,7 @@
 import re
+import os
 
-def fetch_and_write(result_html):
+def fetch_and_write(result_html,dept_in):
 
 	re_session=re.compile("<td><b>Session:&nbsp;&nbsp;</b>(.+?)</td>")
 	re_name=re.compile("td colspan=2><b>Name:&nbsp;&nbsp;</b>(.+?)</td>")
@@ -22,32 +23,44 @@ def fetch_and_write(result_html):
 	sgpa_passed=re.findall(re_sgpa_passed,result_html)
 	cgpa=re.findall(re_cgpa,result_html)
 	
+	
 	try:
-		file=open("result/"+name[0]+".txt","w")
+		file=open("result/"+dept_in+"/"+"batch"+roll[0][1:3]+"/"+str(name[0])+".txt","a+")
 	except:
-		print "unable to create file \"make sure you have created \'result\' directory"
+		print "Error in creating/locating directory\ncheck if you have created required directory"
+	
+	
+	if len(file.read())==0:
+		try:
+			file.write("NAME: "+name[0]+"\tROLL NO: "+roll[0]+"\n\nDEPT: "+dept[0]+"\n\n\n")
+		except:
+			print "unale to write personal details"
 	try:
-		file.write("NAME:"+name[0]+"\tROLL NO:"+roll[0]+"\n\nDEPT:"+dept[0]+"\n\nSEM:"+sem[0]+"\t SESSION:"+session[0]+"\n\n\n")
+		file.write("SEMESTER: "+sem[0]+"\tSESSION: "+session[0]+"\n\n\n")
+	except:
+		print "unable to write sem and session"
+	
+	try:
 		for row in result:
 			for col in row:
 				file.write(col+" ")
 			file.write("\n\n")
 	except:
-		print "unable to write details"
+		print "unable to write result details"
 	try:
-		file.write("TOTAL GRADE POINT:"+tgp[0][1])
+		file.write("TOTAL GRADE POINT: "+tgp[0][1])
 	except:
 		print "unable to write tgp"
 	try:
-		file.write("\t\tSGPA:"+sgpa_passed[0][0])
+		file.write("\t\tSGPA: "+sgpa_passed[0][0])
 	except:
 		print "unable to write sgpa"
 	try:
-		file.write("\t\tCGPA:"+cgpa[0])
+		file.write("\t\tCGPA: "+cgpa[0])
 	except:
 		print "unable to write cgpa"
 	try:
-		file.write("\t\tREMARK:"+sgpa_passed[0][1])
+		file.write("\t\tREMARK: "+sgpa_passed[0][1]+"\n\n\n\n")
 	except:
 		print "unable to write remark"	
 			
