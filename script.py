@@ -1,7 +1,10 @@
 import find_and_write as fnw 
 import re
 import mechanize
+import os
 
+if not os.path.exists('./result'):
+	os.makedirs('./result')
 tarurl="http://nitsikkim.ac.in/"
 def roll2sem(roll):
 	if roll[1:3]=="16":
