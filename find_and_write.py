@@ -1,5 +1,7 @@
 import re
-import os
+
+def letters(input):
+    return ''.join([c for c in input if c.isalpha()])
 
 def fetch_and_write(result_html,dept_in):
 
@@ -23,6 +25,8 @@ def fetch_and_write(result_html,dept_in):
 	sgpa_passed=re.findall(re_sgpa_passed,result_html)
 	cgpa=re.findall(re_cgpa,result_html)
 	
+	#name=letters(name)
+	#print name+"name"
 	
 	try:
 		file=open("result/"+dept_in+"/"+"batch"+roll[0][1:3]+"/"+str(name[0])+".txt","a+")

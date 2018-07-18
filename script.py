@@ -1,6 +1,8 @@
 import find_and_write as fnw 
 import re
 import mechanize
+import os
+
 
 tarurl="http://nitsikkim.ac.in/"
 def roll2sem(roll):
@@ -21,6 +23,13 @@ if __name__=='__main__':
 	#print semester,department
 	depts=['cse','eee','ece','me','ce','bio-tech']
 	sems=['FIRST','SECOND','THIRD','FOURTH','FIFTH','SIXTH','SEVENTH','EIGHTH']
+	batches=['batch15','batch16','batch14']
+	
+	for dept in depts:
+		for batch in batches:
+			path='./result/'+dept+'/'+batch+'/'
+			if not os.path.exists(path):
+				os.makedirs(path)
 	
 	br=mechanize.Browser()
 	response=br.open(tarurl)
@@ -31,7 +40,9 @@ if __name__=='__main__':
 			rolls=fil.split("\r\n")
 		
 			for roll in rolls:
+				
 				if roll !='':
+					print "fetching result of "+roll
 					semcontrol=roll2sem(roll)
 				else:
 					semcontrol=0
@@ -39,7 +50,7 @@ if __name__=='__main__':
 					temp=br.click_link(text='Results')
 					br.open(temp)
 					br.select_form(nr=0)
-					print "fetching result of "+roll
+					
 					br.form['roll']=roll
 					control=br.form.find_control("year")
 					for item in control.items:
