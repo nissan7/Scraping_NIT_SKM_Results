@@ -25,7 +25,7 @@ def fetch_and_write(result_html,dept_in):
 	
 	
 	try:
-		file=open('result/'+str(name[0])+".txt","a+")
+		file=open('result_cse/'+str(name[0])+".txt","a+")
 		if len(file.read())==0:
 			try:
 				file.write("NAME: "+name[0]+"\tROLL NO: "+roll[0]+"\n\nDEPT: "+dept[0]+"\n\n\n")

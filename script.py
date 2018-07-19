@@ -3,8 +3,8 @@ import re
 import mechanize
 import os
 
-if not os.path.exists('./result'):
-	os.makedirs('./result')
+if not os.path.exists('./result_cse'):
+	os.makedirs('./result_cse')
 tarurl="http://nitsikkim.ac.in/"
 def roll2sem(roll):
 	if roll[1:3]=="16":
