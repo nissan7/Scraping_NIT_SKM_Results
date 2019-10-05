@@ -42,7 +42,7 @@ if __name__=='__main__':
 			for roll in rolls:
 				
 				if roll !='':
-					print "fetching result of "+roll
+					print "On"+roll
 					semcontrol=roll2sem(roll)
 				else:
 					semcontrol=0
